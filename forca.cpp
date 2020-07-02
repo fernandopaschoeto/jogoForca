@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -120,14 +121,37 @@ void imprimeForca (int letrasErro) {
             cout << " |     / \\" << endl;
             cout << " |" << endl;
         break;
-    }
+	}    
+}
 
-
+bool verificarLetra (char letra, char vetor [26]) {
+	for (int i=0; i< strlen (vetor); i++) {
+		if (letra == vetor [i]) {
+			return true;
+		}
+	}
+	return false;
 }   
+
+void subistitui(char letra) {
+	for (int i=0; i < strlen (palavraSorte); i++){
+		if (palavraSorte[i] == letra){
+			palavraDigitada[i] = letra;
+			}
+		 }
+	}
+
+bool completo(){
+	for(int i=0; i<strlen(palavraSorte); i++){
+		if(palavraDigitada[i] == '_'){
+			return false;
+			}
+		}
+	return true;
+	}
 
 int main () {
 
-    
     int indice = sorteio(); //Faz sorteio
     copia(indice);
     limpa (); //limpar vetor
@@ -141,14 +165,43 @@ int main () {
         imprimeForca(erros);
         cout << "\n\n";
         imPalavra();
+	//cout << "\n\n Letras já digitadas: " << jaDigitadas << endl;
+	cout << "\n\n Restam " << 7-erros << " tentativas! " << endl;
         cout << "\n\n"; 
         cout << "Digite uma letra: ";
         cin >> letra; 
         letra = tolower (letra);
+	if (verificarLetra(letra, jaDigitadas)) {
+		cout << " Esta letra já foi digitada, escolha outra.  " << endl;
+		cout << " Pressione ENTER para continuar. " << endl;
+		cin.ignore();
+		cin.get();
+		}
+       //break;
 
-        break;
+    	else {
+		jaDigitadas [contador] = letra; 
+		contador++;
+		if(verificarLetra (letra, palavraSorte)) {
+			subistitui (letra);
+			}
+		else {
+			cout << " Você errou, tente novamente!! " << endl;
+			erros++;
+			
+		}
+	     }
+	if(erros==7){
+		cout << "Que pena, você perdeu! ;( " << endl;
+		return 0;
+		}
+	if(completo()){
+		cout << "MUITO BEM, VOCÊ VENCEU!!!! :D " << endl;
+		cout << "A palavra sorteada era: " << palavraSorte << "!! " <<endl;
+		return 0;
+		}
     }
-
+	
 
 
 return 0;
