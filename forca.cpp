@@ -7,9 +7,6 @@
 
 using namespace std;
 
-// 8 minutos - https://www.youtube.com/watch?v=Ov-oy4wC0to&t=433s
-
-
 char palavraSorte [30];
 char palavraDigitada [30];
 const int quantPalavras = 22; //quantidade de palavras para sorteio
